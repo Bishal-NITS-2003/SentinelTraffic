@@ -397,7 +397,10 @@ async function onVideoSelect() {
             els.canvasPlaceholder.style.display = "none";
             drawOverlay();
         };
-        previewImage.src = state.previewData.url;
+        // Prefix with backend URL for cross-origin hosting (Vercel + Render)
+        let previewUrl = state.previewData.url;
+        if (previewUrl.startsWith("/")) previewUrl = CONFIG.BACKEND_URL + previewUrl;
+        previewImage.src = previewUrl;
         
         if (state.mode === "triple_riding" || state.mode === "helmet") {
             els.startBtn.disabled = false;
@@ -834,7 +837,7 @@ async function pollAnalysisProgress() {
         
         // Refresh the live frame preview from in-memory endpoint if running
         if (progData.is_running && progressVal > 0) {
-            els.videoFeed.src = `/current_frame?t=${Date.now()}`;
+            els.videoFeed.src = `${CONFIG.BACKEND_URL}/current_frame?t=${Date.now()}`;
         }
         
         // Poll current stats
