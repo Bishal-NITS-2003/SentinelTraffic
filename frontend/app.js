@@ -836,7 +836,7 @@ async function pollAnalysisProgress() {
         els.progressBarText.textContent = `${progressVal}%`;
         
         // Refresh the live frame preview from in-memory endpoint if running
-        if (progData.is_running && progressVal > 0) {
+        if (progData.is_running) {
             els.videoFeed.src = `${CONFIG.BACKEND_URL}/current_frame?t=${Date.now()}`;
         }
         

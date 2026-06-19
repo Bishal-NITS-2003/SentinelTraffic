@@ -90,6 +90,7 @@ def run_analysis_in_background(video_path: str):
         print(f"Error in background video processing: {e}")
     finally:
         processing_progress = 100.0
+        processor.is_running = False
 
 def ping_self():
     import urllib.request
@@ -312,6 +313,7 @@ def start_analyze(model: AnalyzeModel, background_tasks: BackgroundTasks):
     
     global processing_progress
     processing_progress = 0.0
+    processor.is_running = True
     
     background_tasks.add_task(run_analysis_in_background, video_path)
     return {"status": "success", "message": "Analysis started in background"}
@@ -329,7 +331,10 @@ def get_progress():
 def get_current_frame():
     """Returns the latest annotated sampled frame from memory as a JPEG image."""
     if processor.latest_frame_bytes is None:
-        raise HTTPException(status_code=404, detail="No frame has been analyzed yet.")
+        # Return a transparent 1x1 pixel PNG to prevent broken image icon in browser
+        transparent_1x1_png = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15c4\x00\x00\x00\rIDATx\x9cc`\x00\x01\x00\x00\x05\x00\x01\r\n-\xb4\x00\x00\x00\x00IEND\xaeB`\x82'
+        from fastapi import Response
+        return Response(content=transparent_1x1_png, media_type="image/png")
     from fastapi import Response
     return Response(content=processor.latest_frame_bytes, media_type="image/jpeg")
 
