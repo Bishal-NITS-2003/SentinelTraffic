@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic
+opencv-python
+numpy
+python-multipart
+ultralytics
+psycopg2-binary

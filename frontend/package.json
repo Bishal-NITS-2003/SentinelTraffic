@@ -1,0 +1,10 @@
+{
+  "name": "sentineltraffic-frontend",
+  "version": "1.0.0",
+  "description": "Traffic Rules Violation Detection System Frontend Dashboard",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

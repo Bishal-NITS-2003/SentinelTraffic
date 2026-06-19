@@ -1,0 +1,49 @@
+# Python Cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+.pytest_cache/
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Large Model weights (YOLOv8 weights)
+*.pt
+*.onnx
+yolov8*.pt
+yolov8*.onnx
+
+# Local Databases (SQLite)
+*.db
+*.sqlite
+backend/*.db
+backend/*.sqlite
+backend/traffic_signal.db
+
+# Large Video Files (Avoid pushing large MP4s/AVIs to GitHub)
+Resources/*.mp4
+Resources/*.avi
+Resources/*.mov
+Resources/*.mkv
+Resources/input/
+Resources/output/
+
+# Keep camera test videos for testing purposes
+!Resources/camera-*.mp4
+
+# Generated crop evidence & static previews (Local outputs)
+static/preview.jpg
+static/violations/
+violations/
+
+# System / IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
