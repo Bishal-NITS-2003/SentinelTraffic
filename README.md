@@ -149,7 +149,7 @@ python backend/test_query_endpoints.py
 
 ---
 
-## 📸 Screenshot Walkthrough (Add Your Visuals Here)
+## 📸 Screenshot Walkthrough
 
 To make your Hackathon submission stand out, add screenshots of the running application inside an `assets/` directory and reference them below:
 
